@@ -1,0 +1,27 @@
+SELECT 
+    m.brand,
+    AVG(r.overall) AS avg_review_score
+FROM
+    reviews r
+JOIN
+    metadata m ON r.asin = m.asin
+GROUP BY
+    m.brand
+ORDER BY
+    avg_review_score DESC;
+
+
+SELECT 
+    m.brand,
+    AVG(r.overall) AS avg_review_score,
+    COUNT(r.asin) AS review_count
+FROM
+    reviews r
+JOIN
+    metadata m ON r.asin = m.asin
+GROUP BY
+    m.brand
+HAVING
+    COUNT(r.asin) > 10
+ORDER BY
+    avg_review_score DESC;
